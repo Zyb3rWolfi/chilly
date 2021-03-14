@@ -49,6 +49,6 @@ class commandEvent(commands.Cog):
     async def unban_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
             await ctx.send ("**Missing Argument!** `/unban [user]`")
-        
+    # -----------------------------------
 def setup(bot):
     bot.add_cog(commandEvent(bot))
