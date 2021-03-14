@@ -5,7 +5,7 @@ import time
 client = commands.Bot(command_prefix="!", help_commmand=None)
 client.remove_command('help')
 version = "0.0.1"
-extensions = ['cogs.moderationCommands', 'cogs.basic', 'cogs.events']
+extensions = ['cogs.moderationCommands', 'cogs.basic', 'cogs.events', 'cogs.randomcmds']
 if __name__ == '__main__':
     for ext in extensions:
         client.load_extension(ext)
@@ -14,8 +14,4 @@ if __name__ == '__main__':
 async def on_ready():
     print("Bot is online!", version)
 
-# ----------------------------- Remove 
-with open('token.txt') as f:
-    TOKEN = f.readline()
-# -----------------------------
-client.run(TOKEN) # Replace TOKEN with Bot Token
+client.run()# TOKEN GOES HERE

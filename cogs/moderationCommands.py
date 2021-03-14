@@ -50,5 +50,15 @@ class commandEvent(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
             await ctx.send ("**Missing Argument!** `/unban [user]`")
     # -----------------------------------
+    @commands.has_permissions(kick_members=True)
+    @commands.command()
+    async def kick(self, ctx, name : discord.Member, reason):
+        await name.kick(reason=reason)
+        reason = "**{}** has been kicked. **Reason: `{}`**" .format(name, reason)
+        await ctx.send(reason)
+    @kick.error
+    async def kick_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send ("**Missing Argument!** `/kick [user] [reason]`")
 def setup(bot):
     bot.add_cog(commandEvent(bot))

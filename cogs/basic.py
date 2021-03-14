@@ -12,6 +12,8 @@ class basicCommands(commands.Cog):
         embed.add_field(name = "Ban User", value = "`!ban`", inline = True)
         embed.add_field(name = "Unban User", value = "`!unban`", inline = True)
         embed.add_field(name = "Purge Message", value = "`!purge`", inline = True)
+        embed.add_field(name = "Kick User", value = "`!kick`", inline = True)
+        embed.add_field(name = "Kill Someone", value = "`!kill`", inline = True)            
         await ctx.send(embed=embed)
 def setup(bot):
     bot.add_cog(basicCommands(bot))
