@@ -29,6 +29,8 @@ class fun(commands.Cog):
     async def kill_error(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
             await ctx.send("**Cooldown Activated!** `Try Again in a bit`")
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send("**Missing Argument!** `/kill [user]`")
 
 def setup(bot):
     bot.add_cog(fun(bot))

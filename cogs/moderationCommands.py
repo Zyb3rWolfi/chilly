@@ -1,5 +1,6 @@
 import discord 
 from discord.ext import commands
+import asyncio
 
 class commandEvent(commands.Cog):
     def __init__(self,bot):
@@ -11,8 +12,9 @@ class commandEvent(commands.Cog):
     async def purge(self, ctx, amount=2):
         await ctx.channel.purge(limit = amount + 1)
         number = amount 
-        await ctx.send("`{} Messages has been deleted`" .format(number))
-        await ctx.message.delete()
+        botmsg = await ctx.send("`{} Messages has been deleted`" .format(number))
+        await asyncio.sleep(2)
+        await botmsg.delete()
     
     # -----------------------------------
     # Ban Command
