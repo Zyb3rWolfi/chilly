@@ -62,5 +62,20 @@ class commandEvent(commands.Cog):
     async def kick_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
             await ctx.send ("**Missing Argument!** `/kick [user] [reason]`")
+
+    @commands.has_permissions(manage_channels=True)
+    @commands.command()
+    async def lock(self, ctx, channel : discord.TextChannel=None):
+        channels = channel or ctx.channel
+        channel_name = channels.name
+        await channels.set_permissions(ctx.guild.default_role, send_messages=False)
+        await ctx.send("**Channel:** `{}` **Has Been Locked**" .format(channel_name))
+    @commands.has_permissions(manage_channels=True)
+    @commands.command()
+    async def unlock(self, ctx, channel : discord.TextChannel=None):
+        channels = channel or ctx.channel
+        channel_name = channels.name
+        await ctx.channel.set_permissions(ctx.guild.default_role, send_messages=True)
+        await ctx.send("**Channel:** `{}` **Has Been Unlocked**" .format(channel_name))
 def setup(bot):
     bot.add_cog(commandEvent(bot))
