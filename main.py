@@ -16,10 +16,6 @@ async def on_ready():
     while True:
         await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="You All"))
 
-# -----------------------------
-with open('token.txt') as f:
-    TOKEN = f.readline()
-# -----------------------------
 client.run(os.environ['TOKEN'])
 
 # Either create a new file named TOKEN.txt & paste your bot token 
