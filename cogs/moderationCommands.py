@@ -63,19 +63,36 @@ class commandEvent(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
             await ctx.send ("**Missing Argument!** `/kick [user] [reason]`")
 
-    @commands.has_permissions(manage_channels=True)
+    @commands.has_permissions(kick_members=True)
     @commands.command()
     async def lock(self, ctx, channel : discord.TextChannel=None):
         channels = channel or ctx.channel
         channel_name = channels.name
         await channels.set_permissions(ctx.guild.default_role, send_messages=False)
         await ctx.send("**Channel:** `{}` **Has Been Locked**" .format(channel_name))
-    @commands.has_permissions(manage_channels=True)
+    @commands.has_permissions(kick_members=True)
     @commands.command()
     async def unlock(self, ctx, channel : discord.TextChannel=None):
         channels = channel or ctx.channel
         channel_name = channels.name
         await ctx.channel.set_permissions(ctx.guild.default_role, send_messages=True)
         await ctx.send("**Channel:** `{}` **Has Been Unlocked**" .format(channel_name))
+    @commands.group()
+    async def log(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await ctx.send("`log create`")
+    @commands.has_permissions(manage_channels=True)
+    @log.command()
+    async def create(self, ctx):
+        guild = ctx.guild
+        check = discord.utils.get(guild.categories, name="Chilly Logs")
+        if not check:
+            cat = await ctx.guild.create_category_channel('Chilly Logs')
+            await ctx.guild.create_text_channel("Message Logs", category=cat)
+            await ctx.guild.create_text_channel("Other Logs", category=cat)
+            await ctx.send('**Log Channels Were Succesfully Added!**')
+            return
+        else:
+            await ctx.send('No!')
 def setup(bot):
     bot.add_cog(commandEvent(bot))

@@ -1,8 +1,9 @@
 import discord
 from discord.ext import commands
 import os
+import sqlite3
 
-client = commands.Bot(command_prefix="c ", help_commmand=None)
+client = commands.Bot(command_prefix="c ", help_commmand=None, intents = discord.Intents.all())
 client.remove_command('help')
 version = "0.0.5"
 extensions = ['cogs.moderationCommands', 'cogs.basic', 'cogs.events', 'cogs.randomcmds', 'event.moderation']
@@ -16,7 +17,7 @@ async def on_ready():
     while True:
         await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="You All"))
 
-client.run(os.environ['TOKEN'])
-
+# client.run(os.environ['TOKEN'])
+client.run("ODIwNjQwNzY5MzAzNzczMjI1.YE4HRg.J-bFygmV2CfNTB6e0mfbAVEQjEs")
 # Either create a new file named TOKEN.txt & paste your bot token 
 # Or Remove selected code above & replace TOKEN with your discord token.
