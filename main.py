@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import os
 
 client = commands.Bot(command_prefix="c ", help_commmand=None)
 client.remove_command('help')
@@ -19,7 +20,7 @@ async def on_ready():
 with open('token.txt') as f:
     TOKEN = f.readline()
 # -----------------------------
-client.run(TOKEN)
+client.run(os.environ['TOKEN'])
 
 # Either create a new file named TOKEN.txt & paste your bot token 
 # Or Remove selected code above & replace TOKEN with your discord token.
