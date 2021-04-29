@@ -2,11 +2,12 @@ import discord
 from discord.ext import commands
 import os
 import sqlite3
+from discord import Intents
 
-client = commands.Bot(command_prefix="c ", help_commmand=None, intents = discord.Intents.all())
+client = commands.Bot(command_prefix="c ", help_commmand=None, intents = Intents.all())
 client.remove_command('help')
 version = "0.0.5"
-extensions = ['cogs.moderationCommands', 'cogs.basic', 'cogs.events', 'cogs.randomcmds', 'event.moderation']
+extensions = ['cogs.moderationCommands', 'cogs.basic', 'cogs.events', 'cogs.randomcmds', 'event.moderation', 'cogs.logging']
 if __name__ == '__main__':
     for ext in extensions:
         client.load_extension(ext)
