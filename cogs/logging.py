@@ -15,8 +15,6 @@ class log(commands.Cog):
         if user != self.bot.user:
 
             if reaction.emoji == '1️⃣':
-                delete = self.bot.events.on_message_delete
-                delete.update(enable=False)
                 check = discord.utils.get(guild.categories, name="Chilly Logs") # Find the Category
                 if not check: # If category doesnt exist create the logs
 
@@ -48,13 +46,15 @@ class log(commands.Cog):
                     await message.remove_reaction('2️⃣', user)
 
             if reaction.emoji == '❗':
-                self.bot.dispatch("wait")
 
 
 
     @commands.command()
     async def test(self, ctx):
-        msg = await ctx.send("`1` - Create Logs | `2` - Delete Logs")
+        embed = discord.Embed(title = "Chilly Logging", description = "Chilly Will Log Any Edited, Deleted Messages. More Features & Flexibility Coming Soon", colour = discord.Color.blurple())
+        embed.add_field(name="‎‎‎Logging Commands   ‎‎‎", value="1️⃣ - Turn On Server Logging", inline=True)
+        embed.add_field(name="‎ ‎", value= "2️⃣ - Delete & Turn Off Logging", inline=False)
+        msg = await ctx.send(embed=embed)
         emoji = ['1️⃣', '2️⃣', '❗']
         response = 3
         for i in range(response):
@@ -64,7 +64,6 @@ class log(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message_delete(self, message):
-        x = await self.bot.wait_for("wait")
         if x == True:
             if not message.author.bot:  # Checks for bot message
                 channel = message.channel.name # Channel the deleted message is from
