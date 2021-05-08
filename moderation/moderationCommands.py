@@ -5,7 +5,7 @@ import asyncio
 class commandEvent(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
-    
+    global reason
     # Purge Command
     @commands.command()
     @commands.has_permissions(manage_messages = True)
